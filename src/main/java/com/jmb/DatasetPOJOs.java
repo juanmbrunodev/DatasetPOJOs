@@ -2,6 +2,7 @@ package com.jmb;
 
 import com.jmb.mappers.CarMapper;
 import com.jmb.model.Car;
+import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
@@ -25,9 +26,12 @@ public class DatasetPOJOs {
     }
 
     private void init() throws Exception {
+        SparkConf appConfig = new SparkConf().set("spark.testing.memory", "900000000");
+
         //Create the Spark Session
         SparkSession session = SparkSession.builder()
                 .appName("DatasetPOJOs")
+                .config(appConfig)
                 .master("local").getOrCreate();
 
         //Ingest data from CSV file into a DataFrame
