@@ -37,10 +37,10 @@ public class DatasetPOJOs {
                 .load(PATH_RESOURCES);
 
         //Show first 5 records of the Raw ingested dataset
-        //df.show(5);
+        df.show(5);
 
         //Also print its schema
-        //df.printSchema();
+        df.printSchema();
 
         //Map to a Dataset of Car objects by using a Mapper (MapFunction) class
         Dataset<Car> carDataset = df.map(new CarMapper(), Encoders.bean(Car.class));
